@@ -1,6 +1,6 @@
 # Rick and Morty React App
 
-Este es un proyecto desarrollado con **React** que consume la [API pública de Rick and Morty](https://rickandmortyapi.com/) para mostrar información sobre personajes, episodios y ubicaciones del universo de la serie.
+Este es un proyecto desarrollado con **React** que consume la [API pública de Rick and Morty](https://rickandmortyapi.com/) para mostrar información sobre personajes, episodios y ubicaciones del universo de la serie. Ejecutado y deployado en EC2
 
 ## 🚀 Tecnologías utilizadas
 
