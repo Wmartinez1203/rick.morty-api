@@ -21,7 +21,7 @@ jobs:
       id: get_version
       run: |
         # Consultar los tags existentes de la imagen en Docker Hub
-        response=$(curl -s https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/api-rick-morty-app/tags/)
+        response=$(curl -s https://hub.docker.com/v2/repositories/${{ secrets.DOCKER_USERNAME }}/rick-morty-app-php/tags/)
           
         # Filtrar los tags que siguen el formato v<major>.<minor> y extraer solo los números
         tags=$(echo $response | jq -r '.results[] | select(.name | test("^v[0-9]+\\.[0-9]+$")) | .name' | sed 's/^v//')
@@ -52,8 +52,8 @@ jobs:
     - name: Build and push Docker image
       run: |
         docker build . --file Dockerfile \
-          --tag ${{ secrets.DOCKER_USERNAME }}/api-rick-morty-app:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/api-rick-morty-app:latest
+          --tag ${{ secrets.DOCKER_USERNAME }}/rick-morty-app:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/rick-morty-app:latest
 
   deploy:
     name: Deploy to EC2
@@ -73,8 +73,8 @@ jobs:
           sudo yum update -y
           sudo yum install -y docker
           sudo service docker start
-          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/api-rick-morty-app:latest
-          sudo docker ps -q --filter "name=api-rick-morty-app" | grep -q . && \
-          sudo docker stop api-rick-morty-app && \
-          sudo docker rm rick-morty-app || true
-          sudo docker run -d --name rick-morty-app -p 80:80 ${{ secrets.DOCKER_USERNAME }}/api-rick-morty-app:latest
+          sudo docker pull ${{ secrets.DOCKER_USERNAME }}/rick-morty-app:latest
+          sudo docker ps -q --filter "name=rick-morty-app-php" | grep -q . && \
+          sudo docker stop rick-morty-app-php && \
+          sudo docker rm rick-morty-app-php || true
+          sudo docker run -d --name rick-morty-app-php -p 80:80 ${{ secrets.DOCKER_USERNAME }}/rick-morty-app:latest
