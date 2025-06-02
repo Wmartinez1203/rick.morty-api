@@ -14,7 +14,7 @@ const CharacterView = () => {
     )
   return (
   <div>
-    <h1>Detalle del personaje Rick y Morty</h1>
+    <h1>Detalle del personaje de la serie Rick y Morty</h1>
     {character ? (
       <CharacterCard character={character} />
     ) : (
